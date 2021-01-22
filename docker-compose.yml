@@ -29,20 +29,18 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:latest
     restart: unless-stopped
-    volumes:
-      - 'mariadb:/bitnami/mariadb'
     environment:
       - MARIADB_USER: ${MARIADB_USER}
       - MARIADB_DATABASE: ${MARIADB_DATABASE}
       - ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
       - TZ: ${TZ}
+    volumes:
+      - 'mariadb:/bitnami/mariadb'
 
 # https://hub.docker.com/r/bitnami/wordpress
   wordpress:
     image: docker.io/bitnami/wordpress:latest
     restart: unless-stopped
-    volumes:
-      - 'wordpress:/bitnami/wordpress'
     depends_on:
       - mariadb
     environment:
@@ -52,6 +50,10 @@ services:
       - WORDPRESS_DATABASE_NAME: ${WORDPRESS_DATABASE_NAME}
       - ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
       - TZ: ${TZ}
+    networks:
+      - default
+    volumes:
+      - 'wordpress:/bitnami/wordpress'
 
   # https://hub.docker.com/r/netdata/netdata
   netdata:
@@ -65,11 +67,11 @@ services:
       - SYS_PTRACE
     security_opt:
       - apparmor:unconfined
+    networks:
+      - default
     volumes:
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - default
