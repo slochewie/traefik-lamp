@@ -48,7 +48,7 @@ services:
       - WORDPRESS_DATABASE_USER="${WORDPRESS_DATABASE_USER}"
       - WORDPRESS_DATABASE_NAME="${WORDPRESS_DATABASE_NAME}"
       - ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD}"
-      - TZ: "${TZ}"
+      - TZ="${TZ}"
     networks:
       - default
     volumes:
