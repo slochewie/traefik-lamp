@@ -24,7 +24,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
 
-
 # https://hub.docker.com/r/bitnami/mariadb
   mariadb:
     image: docker.io/bitnami/mariadb:latest
@@ -36,8 +35,6 @@ services:
       - TZ=${TZ}
     networks:
       - default
-    ports:
-      - '3306:3306'
     volumes:
       - mariadb:/bitnami/mariadb
 
