@@ -34,6 +34,8 @@ services:
       - MARIADB_DATABASE="${MARIADB_DATABASE}"
       - ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD}"
       - TZ="${TZ}"
+    networks:
+      - default
     volumes:
       - "mariadb:/bitnami/mariadb"
 
