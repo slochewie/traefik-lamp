@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+
+  portainer:
+    ports:
+      - "9000:9000/tcp"
+
+  mariadb:
+    ports:
+      - "3060:3060/tcp"
+
+  wordpress:
+    ports:
+      - "8080:8080/tcp"
+      - "8443:8443/tcp"
+
+  netdata:
+    ports:
+      - "19999:19999/tcp

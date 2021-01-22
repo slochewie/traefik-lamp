@@ -1,0 +1,75 @@
+version: '3.7'
+
+networks:
+  default
+
+volumes:
+  portainer:
+  mariadb:
+  wordpress:
+  netdata:
+  traefik:
+
+services:
+  #https://documentation.portainer.io/
+  portainer:
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    environment:
+      TZ: "${TZ}"
+    command: -H unix:///var/run/docker.sock
+    networks:
+      - default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
+
+
+# https://hub.docker.com/r/bitnami/mariadb
+  mariadb:
+    image: docker.io/bitnami/mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - 'mariadb:/bitnami/mariadb'
+    environment:
+      - MARIADB_USER: ${MARIADB_USER}
+      - MARIADB_DATABASE: ${MARIADB_DATABASE}
+      - ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      - TZ: ${TZ}
+
+# https://hub.docker.com/r/bitnami/wordpress
+  wordpress:
+    image: docker.io/bitnami/wordpress:latest
+    restart: unless-stopped
+    volumes:
+      - 'wordpress:/bitnami/wordpress'
+    depends_on:
+      - mariadb
+    environment:
+      - MARIADB_HOST: mariadb
+      - MARIADB_PORT_NUMBER: ${MARIADB_PORT_NUMBER}
+      - WORDPRESS_DATABASE_USER: ${WORDPRESS_DATABASE_USER}
+      - WORDPRESS_DATABASE_NAME: ${WORDPRESS_DATABASE_NAME}
+      - ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      - TZ: ${TZ}
+
+  # https://hub.docker.com/r/netdata/netdata
+  netdata:
+    image: netdata/netdata
+    restart: unless-stopped
+    hostname: ${NETDATA_HOST}
+    environment:
+      PGID: ${DOCKER_PGID}
+      TZ: ${TZ}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - default
