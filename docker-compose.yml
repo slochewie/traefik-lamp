@@ -36,6 +36,8 @@ services:
       - TZ=${TZ}
     networks:
       - default
+    ports:
+      - '3306:3306'
     volumes:
       - mariadb:/bitnami/mariadb
 
@@ -43,8 +45,8 @@ services:
   wordpress:
     image: docker.io/bitnami/wordpress:latest
     restart: unless-stopped
-#    depends_on:
-#      - mariadb
+    depends_on:
+      - mariadb
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=${MARIADB_PORT_NUMBER}
