@@ -30,10 +30,10 @@ services:
     image: docker.io/bitnami/mariadb:latest
     restart: unless-stopped
     environment:
-      - MARIADB_USER: "${MARIADB_USER}"
-      - MARIADB_DATABASE: "${MARIADB_DATABASE}"
-      - ALLOW_EMPTY_PASSWORD: "${ALLOW_EMPTY_PASSWORD}"
-      - TZ: "${TZ}"
+      - MARIADB_USER="${MARIADB_USER}"
+      - MARIADB_DATABASE="${MARIADB_DATABASE}"
+      - ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD}"
+      - TZ="${TZ}"
     volumes:
       - "mariadb:/bitnami/mariadb"
 
@@ -42,13 +42,12 @@ services:
     image: docker.io/bitnami/wordpress:latest
     restart: unless-stopped
     depends_on:
-      - mariadb
     environment:
-      - MARIADB_HOST: "${MARIADB_HOST}"
-      - MARIADB_PORT_NUMBER: "${MARIADB_PORT_NUMBER}"
-      - WORDPRESS_DATABASE_USER: "${WORDPRESS_DATABASE_USER}"
-      - WORDPRESS_DATABASE_NAME: "${WORDPRESS_DATABASE_NAME}"
-      - ALLOW_EMPTY_PASSWORD: "${ALLOW_EMPTY_PASSWORD}"
+      - MARIADB_HOST="${MARIADB_HOST}"
+      - MARIADB_PORT_NUMBER="${MARIADB_PORT_NUMBER}"
+      - WORDPRESS_DATABASE_USER="${WORDPRESS_DATABASE_USER}"
+      - WORDPRESS_DATABASE_NAME="${WORDPRESS_DATABASE_NAME}"
+      - ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD}"
       - TZ: "${TZ}"
     networks:
       - default
