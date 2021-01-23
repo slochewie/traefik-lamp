@@ -61,7 +61,7 @@ maintainers, and the original software creators.
 
 Aaron Wilson <https://niteowl.dev>
 
-[![](https://cdn.buymeacoffee.com/buttons/default-orange.png)](https://www.buymeacoffee.com/slowchewie)
+[![](https://cdn.buymeacoffee.com/buttons/default-blue.png)](https://www.buymeacoffee.com/slowchewie)
 
 ## License
 
