@@ -12,6 +12,7 @@ Bitnami Wordpress, Bitnami MariaDB, Portainer, Netdata, and Traefik
 - [Portainer](https://www.portainer.io/) is the definitive open source container management GUI for Kubernetes, Docker, Swarm and ACI.
 - [Traefik](https://traefik.io/) is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 - [WordPress](https://wordpress.org/) is the easiest way to create a free website or blog. It's a powerful hosting platform that grows with you.
+- [PHPmyAdmin](https://www.phpmyadmin.net/) is a free software tool written in PHP, intended to handle the administration of MySQL over the Web. phpMyAdmin supports a wide range of operations on MySQL and MariaDB.
 - [Maria](https://mariadb.org/) Server is one of the most popular open source relational databases. It's made by the original developers of MySQL and guaranteed to stay open source.
 - [Netdata](https://www.netdata.cloud/) - Troubleshoot slowdowns and anomalies in your infrastructure with thousands of metrics, interactive visualizations, and insightful health alarms.
 
