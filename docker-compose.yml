@@ -63,8 +63,6 @@ services:
       - mariadb
     networks:
       - default
-#    ports:
-#      - "8088"
     volumes:
       - wordpress:/bitnami/phpmyadmin
 

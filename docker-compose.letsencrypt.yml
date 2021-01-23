@@ -2,10 +2,6 @@ version: "3.7"
 
 services:
 
-  mariadb:
-    labels:
-      traefik.enable: "true"
-
   portainer:
     labels:
       traefik.enable: "true"
