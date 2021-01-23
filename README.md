@@ -53,6 +53,9 @@ Review the merged configs by running `docker-compose config`.
 - Use for secure Internet facing sites.
 
 Copy `env.sample` to `.env` and populate all fields in the `COMMON` and `LETSENCRYPT` sections.
+```
+cp env.sample .env
+```
 
 Create a link in order to append `docker-compose.letsencrypt.yml` to future docker-compose commands.
 
@@ -60,7 +63,28 @@ Create a link in order to append `docker-compose.letsencrypt.yml` to future dock
 ln -sf docker-compose.letsencrypt.yml docker-compose.override.yml
 ```
 
-Review the merged configs by running `docker-compose config`.
+Review the merged configs by running:
+```
+docker-compose config
+```
+
+## Deployment
+
+Pull and deploy containers with docker-compose.
+
+```bash
+docker-compose pull
+docker-compose up -d
+```
+
+Add credentials for basic http auth. The first user added requires `htpasswd -c`
+in order to create the password file. Subsequent users should only use `htpasswd` to avoid overwriting the file.
+
+```bash
+docker-compose exec traefik apk add --no-cache apache2-utils
+docker-compose exec traefik htpasswd -c /etc/traefik/.htpasswd <user1>
+docker-compose exec traefik htpasswd /etc/traefik/.htpasswd <user2>
+```
 
 ## Acknowledgments
 
