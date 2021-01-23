@@ -64,7 +64,8 @@ services:
     networks:
       - default
     ports:
-      - "8088/tcp"
+      - "8088"
+      - "8843"
     volumes:
       - wordpress:/bitnami/phpmyadmin
 
