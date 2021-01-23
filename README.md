@@ -1,4 +1,4 @@
-# Docker Wordpress LAMP Stack
+# Docker Traefik reverse proxy Wordpress LAMP Stack
 Bitnami Wordpress stack with MariaDB, Portainer, Netdata, and Traefik
 
 ## Motivation
