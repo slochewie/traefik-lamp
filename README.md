@@ -1,4 +1,5 @@
 # Docker Wordpress LAMP Stack
+Bitnami Wordpress stack with MariaDB, Portainer, Netdata, Traefik
 
 ## Motivation
 
