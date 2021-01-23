@@ -7,6 +7,7 @@ volumes:
   portainer:
   mariadb:
   wordpress:
+  phpmyadmin:
   netdata:
   traefik:
 
@@ -60,6 +61,8 @@ services:
     image: 'docker.io/bitnami/phpmyadmin:latest'
     depends_on:
       - mariadb
+    volumes:
+      - wordpress:/bitnami/phpmyadmin
 
   # https://hub.docker.com/r/netdata/netdata
   netdata:
