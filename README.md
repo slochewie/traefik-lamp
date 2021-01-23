@@ -1,9 +1,9 @@
 # Docker Wordpress LAMP Stack with Traefik revese proxy.
-Bitnami Wordpress stack with MariaDB, Portainer, Netdata, and Traefik
+Bitnami Wordpress, Bitnami MariaDB, Portainer, Netdata, and Traefik
 
 ## Motivation
 
-- host each service as a subdomain of a personal domain with letsencrypt
+- host each service as a subdomain of a domain with letsencrypt
 - run public maintained images with no modifications
 - require minimal configuration and setup
 
