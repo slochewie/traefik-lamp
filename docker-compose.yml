@@ -56,6 +56,11 @@ services:
     volumes:
       - wordpress:/bitnami/wordpress
 
+  phpmyadmin:
+    image: 'docker.io/bitnami/phpmyadmin:latest'
+    depends_on:
+      - mariadb
+
   # https://hub.docker.com/r/netdata/netdata
   netdata:
     image: netdata/netdata
