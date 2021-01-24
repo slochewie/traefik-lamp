@@ -6,7 +6,7 @@ services:
     ports:
       - "9000:9000/tcp"
 
-  mariadb:
+  mysql:
     ports:
       - "3060:3060/tcp"
 
