@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 networks:
   default:
@@ -12,7 +12,7 @@ volumes:
   traefik:
 
 services:
-  #https://documentation.portainer.io/
+# https://documentation.portainer.io/
   portainer:
     image: portainer/portainer-ce
     restart: unless-stopped
@@ -61,6 +61,7 @@ services:
     volumes:
       - wordpress:/bitnami/wordpress
 
+# https://hub.docker.com/r/bitnami/phpmyadmin/
   phpmyadmin:
     image: 'docker.io/bitnami/phpmyadmin:latest'
     depends_on:
