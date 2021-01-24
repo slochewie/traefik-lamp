@@ -1,5 +1,5 @@
 # Docker Wordpress LAMP Stack with Traefik revese proxy.
-Bitnami Wordpress, Bitnami MariaDB, Bitnami phpMyAdmin, Portainer, Netdata, and Traefik
+Wordpress, MariaDB, phpMyAdmin, Portainer, Netdata, and Traefik
 
 ## Motivation
 
@@ -58,6 +58,9 @@ docker-compose config
 Copy `env.sample` to `.env` and populate all fields in the `COMMON` and `LETSENCRYPT` sections.
 ```
 cp env.sample .env
+```
+```
+nano .env
 ```
 
 Create a link in order to append `docker-compose.letsencrypt.yml` to future docker-compose commands.
