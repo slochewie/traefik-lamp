@@ -5,6 +5,7 @@ services:
   mysql:
     labels:
       traefik.enable: "true"
+      traefik.docker.network: traefik-lamp_default
 
   portainer:
     labels:
