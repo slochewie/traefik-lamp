@@ -84,6 +84,7 @@ docker-compose up -d
 ```
 Stop here if you chose the Direct Configuration option, otherwise continue.
 
+IMPORTANT: Traefik will not properly reverse proxy until completed.
 Add credentials for basic http auth. The first user added requires `htpasswd -c`
 in order to create the password file. Subsequent users should only use `htpasswd` to avoid overwriting the file.
 
@@ -92,13 +93,10 @@ docker-compose exec traefik apk add --no-cache apache2-utils
 docker-compose exec traefik htpasswd -c /etc/traefik/.htpasswd <user1>
 docker-compose exec traefik htpasswd /etc/traefik/.htpasswd <user2>
 ```
-
-Default Bitnami WordPress login:
-username: user
-password: bitnami
-
-Login into phpMyAdmin with username root and blank password and then secure your
-databases by adding passwords for the root and bn_wordpress users.
+Doesn't hurt to restart the stack to force container awareness of the newly created .htaccess file
+```
+docker-compose restart
+```
 
 ## Acknowledgments
 
