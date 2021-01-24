@@ -1,14 +1,12 @@
-version: "3.7"
+version: '2.2'
 
 networks:
   default:
 
 volumes:
   portainer:
-  mariadb:
+  mysql:
   wordpress:
-  phpmyadmin:
-  netdata:
   traefik:
 
 services:
@@ -25,53 +23,54 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
 
-# https://hub.docker.com/r/bitnami/mariadb
-  mariadb:
-    image: docker.io/bitnami/mariadb:latest
+# https://github.com/linuxserver/docker-mariadb
+  mysql:
+    image: ghcr.io/linuxserver/mariadb
     restart: unless-stopped
     environment:
-      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_DATABASE: ${MARIADB_DATABASE}
-      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      PUID: ${PUID}
+      GUID: ${GUID}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       TZ: ${TZ}
     networks:
       - default
     volumes:
-      - mariadb:/bitnami/mariadb
+      - mysql:/config
 
-# https://hub.docker.com/r/bitnami/wordpress
+# https://hub.docker.com/_/wordpress
+# https://hub.docker.com/r/arm32v7/wordpress
   wordpress:
-    image: docker.io/bitnami/wordpress:latest
+#    image: arm32v7/wordpress:latest
+    image: ${WORDPRESS_IMAGE}
     restart: unless-stopped
     depends_on:
-      - mariadb
+      - mysql
     environment:
-      MARIADB_HOST: mariadb
-      MARIADB_PORT_NUMBER: ${MARIADB_PORT_NUMBER}
-      WORDPRESS_DATABASE_USER: ${MARIADB_USER}
-      WORDPRESS_DATABASE_NAME: ${MARIADB_DATABASE}
-      WORDPRESS_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
-      WORDPRESS_SKIP_INSTALL: ${WORDPRESS_SKIP_INSTALL}
-      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      WORDPRESS_DB_HOST: ${MYSQL_HOST}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${TZ}
     networks:
       - default
     volumes:
-      - wordpress:/bitnami/wordpress
+      - wordpress:/var/www/html
 
-# https://hub.docker.com/r/bitnami/phpmyadmin/
+# https://hub.docker.com/_/phpmyadmin
   phpmyadmin:
-    image: 'docker.io/bitnami/phpmyadmin:latest'
+    image: 'phpmyadmin:latest'
+    restart: unless-stopped
     depends_on:
-      - mariadb
+      - mysql
+    environment:
+      PMA_HOST: ${MYSQL_HOST}
     networks:
       - default
-    volumes:
-      - wordpress:/bitnami/phpmyadmin
 
-  # https://hub.docker.com/r/netdata/netdata
+# https://hub.docker.com/r/netdata/netdata
   netdata:
     image: netdata/netdata
     restart: unless-stopped
