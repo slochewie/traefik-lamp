@@ -84,7 +84,8 @@ docker-compose up -d
 ```
 Stop here if you chose the Direct Configuration option, otherwise continue.
 
-IMPORTANT: Traefik will not properly reverse proxy until completed.
+IMPORTANT: Traefik will not properly reverse proxy until the following is completed.
+
 Add credentials for basic http auth. The first user added requires `htpasswd -c`
 in order to create the password file. Subsequent users should only use `htpasswd` to avoid overwriting the file.
 
