@@ -43,7 +43,6 @@ services:
 # https://hub.docker.com/_/wordpress
 # https://hub.docker.com/r/arm32v7/wordpress
   wordpress:
-#    image: arm32v7/wordpress:latest
     image: ${WORDPRESS_IMAGE}
     restart: unless-stopped
     depends_on:
