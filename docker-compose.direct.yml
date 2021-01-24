@@ -17,9 +17,9 @@ services:
 
   phpmyadmin:
     ports:
-      - '8088:8088/tcp'
-      - '8843:8843/tcp'
+      - "8088:8088/tcp"
+      - "8843:8843/tcp"
 
   netdata:
     ports:
-      - "19999:19999/tcp
+      - "19999:19999/tcp"
